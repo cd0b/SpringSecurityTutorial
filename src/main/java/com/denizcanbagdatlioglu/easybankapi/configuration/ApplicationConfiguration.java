@@ -5,10 +5,11 @@ import com.denizcanbagdatlioglu.easybankapi.application.user.domain.usecases.IFi
 import com.denizcanbagdatlioglu.easybankapi.application.user.domain.usecases.IRegisterNewCustomerUseCase;
 import com.denizcanbagdatlioglu.easybankapi.application.user.service.FindCustomerByEmailApplicationService;
 import com.denizcanbagdatlioglu.easybankapi.application.user.service.RegisterNewCustromerApplicationService;
-import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-@SpringBootConfiguration
+@Configuration
+//@EnableWebSecurity
 //@EnableJpaRepositories(basePackages = "com.denizcanbagdatlioglu.easybankapi.repository.jparepository")
 //@EntityScan(basePackages = "com.denizcanbagdatlioglu.easybankapi.repository.model")
 public class ApplicationConfiguration {
