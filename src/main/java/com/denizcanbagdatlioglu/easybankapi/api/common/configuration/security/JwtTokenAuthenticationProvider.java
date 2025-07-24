@@ -26,7 +26,7 @@ public class JwtTokenAuthenticationProvider implements AuthenticationProvider {
         String userNameFromUserDetails = userDetails.getUsername();
         if(jwtUtil.isTokenValid(token, userNameFromUserDetails)) {
             Set<? extends GrantedAuthority> authorities = Set.copyOf(userDetails.getAuthorities());
-            JwtAuthentication grantedAuthentication = new JwtAuthentication(token, userNameFromUserDetails, authorities);
+            JwtAuthentication grantedAuthentication = new JwtAuthentication(userNameFromUserDetails, authorities);
             grantedAuthentication.setAuthenticated(true);
             return grantedAuthentication;
         }

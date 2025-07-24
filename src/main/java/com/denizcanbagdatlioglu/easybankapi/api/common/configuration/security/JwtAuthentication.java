@@ -23,6 +23,12 @@ public class JwtAuthentication implements Authentication {
         this.authorities = null;
     }
 
+    public JwtAuthentication(String username, Set<? extends GrantedAuthority> authorities) {
+        this.token = null;
+        this.username = username;
+        this.authorities = authorities;
+    }
+
     @Override
     public Set<? extends GrantedAuthority> getAuthorities() {
         return authorities;
