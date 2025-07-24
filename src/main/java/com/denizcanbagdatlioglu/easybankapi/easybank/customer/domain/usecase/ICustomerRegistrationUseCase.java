@@ -5,5 +5,5 @@ import com.denizcanbagdatlioglu.easybankapi.easybank.customer.domain.entity.Cust
 import java.util.Optional;
 
 public interface ICustomerRegistrationUseCase {
-    Optional<Customer> registerCustomer(Customer customer, String passwordConfirmation);
+    Optional<Customer> registerCustomer(Customer customer);
 }

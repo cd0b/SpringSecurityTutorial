@@ -3,7 +3,4 @@ package com.denizcanbagdatlioglu.easybankapi.easybank.customer.domain.valueobjec
 public record Password(
         String value
 ) {
-    public boolean confirm(String confirmation) {
-        return true;
-    }
 }

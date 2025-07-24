@@ -15,9 +15,8 @@ public class CustomerRegisterationService implements ICustomerRegistrationUseCas
     }
 
     @Override
-    public Optional<Customer> registerCustomer(Customer customer, String passwordConfirmation) {
+    public Optional<Customer> registerCustomer(Customer customer) {
         if(!customer.getEmail().isValid()) return Optional.empty();
-        if(!customer.getPassword().confirm(passwordConfirmation)) return Optional.empty();
 
         return customerRegistrationPort.registerCustomer(customer);
     }

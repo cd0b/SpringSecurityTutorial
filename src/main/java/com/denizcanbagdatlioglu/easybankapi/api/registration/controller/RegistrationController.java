@@ -9,13 +9,12 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/registration")
@@ -31,9 +30,11 @@ public class RegistrationController {
     @PostMapping
     public ResponseEntity<RegistrationResponse> register(@Valid @RequestBody RegistrationRequest request) {
         Customer customer = mapper.toEntity(request);
-        String passwordConfirmation = passwordEncoder.encode(request.passwordConfirmation());
-        Optional<Customer> maybeCustomer = customerRegistrationUseCase.registerCustomer(customer, passwordConfirmation);
-        return maybeCustomer.map(mapper::toDTO)
+        if(!passwordEncoder.matches(request.passwordConfirmation(), customer.getPassword().value()))
+            throw new BadCredentialsException("Passwords don't match");
+        return customerRegistrationUseCase
+                .registerCustomer(customer)
+                .map(mapper::toDTO)
                 .map(o -> ResponseEntity.status(HttpStatus.CREATED).body(o))
                 .orElse(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new RegistrationResponse("", "", "", "")));
     }
