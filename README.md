@@ -50,6 +50,15 @@ This repository is not a complete project. It is a personal learning space for e
 > - This is the default behavior.
 > - For async operations, `SecurityContextHolder` can be configured to use `InheritableThreadLocal`, so child threads inherit the parent’s context.
 > - A global strategy also exists but it is rarely useful I guess.
+13. CORS
+> Cross-Origin Resource Sharing is a precautionary mechanism implementd by the browser.
+> `Origin` consists of protocol, domain and port insformation.
+> `https://domain1.com:111` and `https://domain2.com:111` are different origins.
+> `https://domain.com:111` and `https://domain.com:222` are different origins.
+> `http://domain.com:111` and `https://domain.com:111` are different origins.
+> If browser dedects that an origin request sent to another origin browser first send a `preflight request` to target resource.
+> If target respond with a response which includes `Access-Control-*` headers browser decide whether to send the actual request.
+> We can use `.cors()` method on HttpSecurity object to configure cors in Spring Boot.
 
 ### Practice
 1. TLS configuration on localhost
