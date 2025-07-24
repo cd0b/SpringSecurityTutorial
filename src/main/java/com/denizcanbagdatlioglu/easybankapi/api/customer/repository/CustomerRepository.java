@@ -28,6 +28,6 @@ public class CustomerRepository implements IFindCustomerByEmailPort, ICustomerRe
     @Override
     public Optional<Customer> registerCustomer(Customer customer) {
         CustomerModel customerModel = jpaCustomerRepository.save(customerMapper.toModel(customer));
-        return Optional.of(customerModel).filter(c -> c.getId() > 0).map(customerMapper::toEntity);
+        return Optional.of(customerModel).filter(c -> c.getId() != null).map(customerMapper::toEntity);
     }
 }

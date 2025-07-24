@@ -14,9 +14,9 @@ import java.util.Date;
 public class CustomerModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false, unique = true, updatable = false)
-    private int id;
+    private String id;
 
     @Column(name = "name", nullable = false)
     private String name;

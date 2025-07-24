@@ -73,7 +73,7 @@ public interface RegistrationDTOMapper {
     }
 
     default ID defaultID() {
-        return new ID(0);
+        return new ID(null);
     }
 
     default Set<Role> defaultRoles() {

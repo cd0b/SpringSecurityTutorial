@@ -35,7 +35,7 @@ public interface CustomerMapper {
     CustomerModel toModel(Customer customer);
 
     @Named("toID")
-    default ID toID(int id) {
+    default ID toID(String id) {
         return new ID(id);
     }
 
@@ -73,7 +73,7 @@ public interface CustomerMapper {
     }
 
     @Named("fromID")
-    default int fromID(ID id) {
+    default String fromID(ID id) {
         return id.value();
     }
 
