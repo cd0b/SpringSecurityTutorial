@@ -1,0 +1,125 @@
+{
+	"info": {
+		"_postman_id": "63e8e247-8afb-449a-8405-d8e7160e88a9",
+		"name": "easybankapi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "29362179"
+	},
+	"item": [
+		{
+			"name": "FirstAdminLogin",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"password": "admin",
+						"username": "admin@easybank.com"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "https://localhost:443/api/login"
+			},
+			"response": []
+		},
+		{
+			"name": "DenizCanRegistration",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{bearerToken}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Deniz Can\",\r\n    \"email\": \"iamdenizcan@example.com\",\r\n    \"phoneNumber\": \"+90 000 000 0000\",\r\n    \"password\": \"123456\",\r\n    \"passwordConfirmation\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:443/api/registration"
+			},
+			"response": []
+		},
+		{
+			"name": "AuthenticationTest",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{bearerToken}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "https://localhost:443/api/securitytest/authentication"
+			},
+			"response": []
+		},
+		{
+			"name": "DenizCanLogin",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"password": "123456",
+						"username": "iamdenizcan@example.com"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "https://localhost:443/api/login"
+			},
+			"response": []
+		},
+		{
+			"name": "AuthorizationTest",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://localhost:443/api/securitytest/authorization"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"if (pm.request.url.path.includes(\"login\") && pm.response.code === 200) {\r",
+					"    const jsonResponse = pm.response.json();\r",
+					"    const token = jsonResponse.token\r",
+					"\r",
+					"    if (token) {\r",
+					"        pm.collectionVariables.set(\"bearerToken\", token);\r",
+					"    }\r",
+					"}"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "bearerToken",
+			"value": ""
+		}
+	]
+}
