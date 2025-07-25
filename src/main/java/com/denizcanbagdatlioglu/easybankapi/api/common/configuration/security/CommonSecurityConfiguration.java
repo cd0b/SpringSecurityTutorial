@@ -41,8 +41,9 @@ public class CommonSecurityConfiguration {
     }
 
     @Bean
-    public JwtTokenAuthenticationFilter jwtTokenAuthenticationFilter(AuthenticationManager authenticationManager) {
-        return new JwtTokenAuthenticationFilter(authenticationManager);
+    public JwtTokenAuthenticationFilter jwtTokenAuthenticationFilter(AuthenticationManager authenticationManager,
+                                                                     AuthenticationEntryPoint authenticationEntryPoint) {
+        return new JwtTokenAuthenticationFilter(authenticationManager, authenticationEntryPoint);
     }
 
     @Bean

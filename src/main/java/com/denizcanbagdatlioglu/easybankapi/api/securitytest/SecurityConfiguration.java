@@ -14,11 +14,13 @@ public class SecurityConfiguration {
     private final BaseHttpSecurityConfigurationProvider baseHttpSecurityConfigurationProvider;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityTestFilterChain(HttpSecurity http) throws Exception {
         return baseHttpSecurityConfigurationProvider.baseHttpSecurity(http)
-                .securityMatcher("/securitytest")
+                .securityMatcher("/api/securitytest/**")
                 .authorizeHttpRequests(
-                        c->c.anyRequest().authenticated()
+                        c -> c
+                                .requestMatchers("/api/securitytest/authorization").hasRole("ADMIN")
+                                .requestMatchers("/api/securitytest/authentication").authenticated()
                 )
                 .build();
     }

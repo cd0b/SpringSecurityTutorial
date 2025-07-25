@@ -17,12 +17,13 @@ public class RegistrationSecurityConfiguration {
 
     @Bean("registrationSecurityFilterChain")
     public SecurityFilterChain securityFilterChain(HttpSecurity http, DaoAuthenticationProvider daoAuthenticationProvider) throws Exception {
-        return baseHttpSecurityConfigurationProvider
+        var chain = baseHttpSecurityConfigurationProvider
                 .baseHttpSecurity(http)
-                .securityMatcher("/api/registration")
+                .securityMatcher("/api/registration/**")
                 .authorizeHttpRequests(
-                        request -> request.requestMatchers(HttpMethod.POST, "/api/registration").permitAll()
+                        request -> request.requestMatchers(HttpMethod.POST, "/api/registration").hasRole("ADMIN")
                 )
                 .build();
+        return chain;
     }
 }

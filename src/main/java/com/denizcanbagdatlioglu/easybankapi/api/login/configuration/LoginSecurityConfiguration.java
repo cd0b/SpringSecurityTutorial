@@ -24,7 +24,7 @@ public class LoginSecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
                                                    @Qualifier("loginAuthenticationManager")
                                                    AuthenticationManager authenticationManager) throws Exception {
-        return baseHttpSecurityConfigurationProvider
+        var chain = baseHttpSecurityConfigurationProvider
                 .baseHttpSecurity(http)
                 .securityMatcher("/api/login")
                 .httpBasic(Customizer.withDefaults())
@@ -33,6 +33,7 @@ public class LoginSecurityConfiguration {
                 )
                 .authenticationManager(authenticationManager)
                 .build();
+        return chain;
     }
 
     @Bean("loginAuthenticationManager")

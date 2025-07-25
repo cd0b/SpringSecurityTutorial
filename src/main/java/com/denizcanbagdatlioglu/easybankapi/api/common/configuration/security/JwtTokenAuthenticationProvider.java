@@ -21,17 +21,21 @@ public class JwtTokenAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         JwtAuthentication jwtAuthentication = (JwtAuthentication) authentication;
         String token = jwtAuthentication.getCredentials();
-        String userNameFromToken = jwtUtil.getUsername(token);
-        UserDetails userDetails = userDetailsService.loadUserByUsername(userNameFromToken);
-        String userNameFromUserDetails = userDetails.getUsername();
-        if(jwtUtil.isTokenValid(token, userNameFromUserDetails)) {
-            Set<? extends GrantedAuthority> authorities = Set.copyOf(userDetails.getAuthorities());
-            JwtAuthentication grantedAuthentication = new JwtAuthentication(userNameFromUserDetails, authorities);
-            grantedAuthentication.setAuthenticated(true);
-            return grantedAuthentication;
-        }
-        else {
-            throw new BadCredentialsException("Invalid token: " + token);
+        try
+        {
+            String userNameFromToken = jwtUtil.getUsername(token);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(userNameFromToken);
+            String userNameFromUserDetails = userDetails.getUsername();
+            if (jwtUtil.isTokenValid(token, userNameFromUserDetails)) {
+                Set<? extends GrantedAuthority> authorities = Set.copyOf(userDetails.getAuthorities());
+                JwtAuthentication grantedAuthentication = new JwtAuthentication(userNameFromUserDetails, authorities);
+                grantedAuthentication.setAuthenticated(true);
+                return grantedAuthentication;
+            } else {
+                throw new BadCredentialsException("Invalid token!");
+            }
+        } catch (Exception e) {
+            throw new BadCredentialsException("Invalid token!");
         }
     }
 

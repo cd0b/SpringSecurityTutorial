@@ -1,6 +1,7 @@
 package com.denizcanbagdatlioglu.easybankapi.api.customer.mapper;
 
 import com.denizcanbagdatlioglu.easybankapi.api.customer.repository.model.CustomerModel;
+import com.denizcanbagdatlioglu.easybankapi.api.customer.repository.model.RoleModel;
 import com.denizcanbagdatlioglu.easybankapi.easybank.common.valueobject.ID;
 import com.denizcanbagdatlioglu.easybankapi.easybank.customer.domain.entity.Customer;
 import com.denizcanbagdatlioglu.easybankapi.easybank.customer.domain.valueobject.*;
@@ -8,7 +9,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -60,9 +60,9 @@ public interface CustomerMapper {
     }
 
     @Named("toRoles")
-    default Set<Role> toRoles(String roles) {
-        return Arrays.stream(roles.split(","))
-                .map(String::trim)
+    default Set<Role> toRoles(Set<RoleModel> roles) {
+        return roles.stream()
+                .map(RoleModel::getName)
                 .map(Role::new)
                 .collect(Collectors.toSet());
     }
@@ -98,8 +98,15 @@ public interface CustomerMapper {
     }
 
     @Named("fromRoles")
-    default String fromRoles(Set<Role> roles) {
-        return roles.stream().map(Role::value).collect(Collectors.joining(","));
+    default Set<RoleModel> fromRoles(Set<Role> roles) {
+        return roles.stream()
+                .map(Role::value)
+                .map(roleString -> {
+                    RoleModel roleModel = new RoleModel();
+                    roleModel.setName(roleString);
+                    return roleModel;
+                })
+                .collect(Collectors.toSet());
     }
 
     @Named("fromDate")

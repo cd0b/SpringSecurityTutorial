@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "customers")
@@ -30,8 +32,11 @@ public class CustomerModel {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "roles", nullable = false)
-    private String roles;
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinTable(name = "customerRoles",
+            joinColumns = @JoinColumn(name = "customerId"),
+            inverseJoinColumns = @JoinColumn(name = "roleId"))
+    private Set<RoleModel> roles = new HashSet<>();
 
     @Column(name = "creationDate", nullable = false)
     private Date creationDate;
