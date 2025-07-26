@@ -59,6 +59,24 @@ This repository is not a complete project. It is a personal learning space for e
 > If browser dedects that an origin request sent to another origin browser first send a `preflight request` to target resource.
 > If target respond with a response which includes `Access-Control-*` headers browser decide whether to send the actual request.
 > We can use `.cors()` method on HttpSecurity object to configure cors in Spring Boot.
+14. CSRF
+> Cross-Site Request Forgery is an security attack.
+> ```xhtml
+> <html>
+>   <form action="http://targetsite.com/account/update" method="post">
+>       <input type="text" name="email" value="evil@evil.com" />
+>       <input type="submit" id="submit" />
+>   </form>
+>   <script>
+>       document.getElementById("document").click();
+>   </script>
+> </html>
+> ```
+> When user send a GET request to `evil.com`, the attacker send that form to victim.
+> Browser redirects to address `http://targetsite.com/account/update` with a email value and the victim's emil is uopdated.
+> CSRF token can be used to prevent the attack.
+> Web application sends a token and check the existance of token for each `POST`, `PUT`, `DELETE` requests.
+
 
 ### Practice
 1. TLS configuration on localhost
@@ -69,6 +87,7 @@ This repository is not a complete project. It is a personal learning space for e
 6. Custom **AuthenticationProvider**
 7. Custom **AuthenticationEntryPoint**
 8. Custom **AccessDeniedHandler**
+9. JwtToken based authentication implementation (look `jwt` branch)
 
 ### Followed Courses and Documents
 - [Spring Security Zero to Master (Udemy)](https://www.udemy.com/course/spring-security-zero-to-master)
@@ -100,3 +119,4 @@ cd SpringSecurityTutorial
 
 # Run the project
 mvn spring-boot:run
+```
