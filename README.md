@@ -136,6 +136,7 @@ This repository is not a complete project. It is a personal learning space for e
 7. Custom **AuthenticationEntryPoint**
 8. Custom **AccessDeniedHandler**
 9. JwtToken based authentication implementation
+10. Social Login With Google Oauth2 Server
 
 ### Followed Courses and Documents
 - [Spring Security Zero to Master (Udemy)](https://www.udemy.com/course/spring-security-zero-to-master)
