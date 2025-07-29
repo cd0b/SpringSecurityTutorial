@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "63e8e247-8afb-449a-8405-d8e7160e88a9",
 		"name": "easybankapi",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "29362179"
 	},
 	"item": [
@@ -11,14 +11,33 @@
 			"request": {
 				"auth": {
 					"type": "basic",
-					"basic": {
-						"password": "admin",
-						"username": "admin@easybank.com"
-					}
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin@easybank.com",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
-				"url": "https://localhost:443/api/login"
+				"url": {
+					"raw": "https://localhost:443/api/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "443",
+					"path": [
+						"api",
+						"login"
+					]
+				}
 			},
 			"response": []
 		},
@@ -27,9 +46,13 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{bearerToken}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearerToken}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "POST",
 				"header": [],
@@ -42,7 +65,18 @@
 						}
 					}
 				},
-				"url": "https://localhost:443/api/registration"
+				"url": {
+					"raw": "https://localhost:443/api/registration",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "443",
+					"path": [
+						"api",
+						"registration"
+					]
+				}
 			},
 			"response": []
 		},
@@ -51,13 +85,29 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{bearerToken}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearerToken}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
-				"url": "https://localhost:443/api/securitytest/authentication"
+				"url": {
+					"raw": "https://localhost:443/api/securitytest/authentication",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "443",
+					"path": [
+						"api",
+						"securitytest",
+						"authentication"
+					]
+				}
 			},
 			"response": []
 		},
@@ -66,23 +116,64 @@
 			"request": {
 				"auth": {
 					"type": "basic",
-					"basic": {
-						"password": "123456",
-						"username": "iamdenizcan@example.com"
-					}
+					"basic": [
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "iamdenizcan@example.com",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
-				"url": "https://localhost:443/api/login"
+				"url": {
+					"raw": "https://localhost:443/api/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "443",
+					"path": [
+						"api",
+						"login"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "AuthorizationTest",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearerToken}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
-				"url": "https://localhost:443/api/securitytest/authorization"
+				"url": {
+					"raw": "https://localhost:443/api/securitytest/authorization",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "443",
+					"path": [
+						"api",
+						"securitytest",
+						"authorization"
+					]
+				}
 			},
 			"response": []
 		}
