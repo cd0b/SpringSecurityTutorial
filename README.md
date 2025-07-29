@@ -135,7 +135,7 @@ This repository is not a complete project. It is a personal learning space for e
 6. Custom **AuthenticationProvider**
 7. Custom **AuthenticationEntryPoint**
 8. Custom **AccessDeniedHandler**
-9. JwtToken based authentication implementation (look `jwt` branch)
+9. JwtToken based authentication implementation
 
 ### Followed Courses and Documents
 - [Spring Security Zero to Master (Udemy)](https://www.udemy.com/course/spring-security-zero-to-master)
@@ -151,6 +151,7 @@ This repository is not a complete project. It is a personal learning space for e
 - Docker
 
 ### Running the Project
+##### Running the JwtToken Application
 
 ```bash
 # Run a PostgreSQL container
@@ -163,7 +164,7 @@ docker run --name easybankapi-postgres \
 
 # Clone the repository
 git clone https://github.com/cd0b/SpringSecurityTutorial
-cd SpringSecurityTutorial
+cd SpringSecurityTutorial/easybank-api
 
 # Run the project
 mvn spring-boot:run
