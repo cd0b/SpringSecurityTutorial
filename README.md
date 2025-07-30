@@ -137,6 +137,7 @@ This repository is not a complete project. It is a personal learning space for e
 8. Custom **AccessDeniedHandler**
 9. JwtToken based authentication implementation
 10. Social Login With Google Oauth2 Server
+11. Using Keycloak as Authorization Server
 
 ### Followed Courses and Documents
 - [Spring Security Zero to Master (Udemy)](https://www.udemy.com/course/spring-security-zero-to-master)
@@ -166,6 +167,19 @@ docker run --name easybankapi-postgres \
 # Clone the repository
 git clone https://github.com/cd0b/SpringSecurityTutorial
 cd SpringSecurityTutorial/easybank-api
+
+# Run the project
+mvn spring-boot:run
+```
+
+##### Running the KeyCloak Application
+```bash
+# Run a KeyCloak container
+docker run -d -p 127.0.0.1:3000:8080 -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:26.3.2 start-dev
+
+# Clone the repository
+git clone https://github.com/cd0b/SpringSecurityTutorial
+cd SpringSecurityTutorial/UsingKeyCloak
 
 # Run the project
 mvn spring-boot:run
